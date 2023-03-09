@@ -1,0 +1,9 @@
+.profile__avatar {
+  padding-right: 30px;
+}
+
+@media screen and (max-width: 900px) {
+  .profile__avatar {
+    padding: 0;
+  }
+}

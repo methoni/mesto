@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mesto</title>
+    <link rel="stylesheet" href="pages/index.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="page">
+        <!-- Header start -->
+        <header class="header">
+          <img
+            src="./images/header__logo.svg"
+            class="header__logo"
+            alt="Логотип Mesto"
+          />
+        </header>
+        <!-- Header end -->
+        <!-- Main content start -->
+        <main class="content">
+          <!-- Section 1 (profile) start -->
+          <section class="profile">
+            <img
+              src="./images/avatar.png"
+              alt="Аватар"
+              class="profile__avatar"
+            />
+            <div class="profile__info">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button class="profile__edit"></button>
+              <p class="profile__job">Исследователь океана</p>
+            </div>
+            <button class="profile__add"></button>
+          </section>
+          <!-- Section 1 (profile) end -->
+          <!-- Section 2 (places) start -->
+          <section class="places" aria-label="Фото">
+            <ul class="places__list">
+              <li class="place">
+                <img
+                  src="./images/karachaevsk.jpg"
+                  alt="Карачаевск"
+                  class="place__image"
+                />
+                <div class="place__line">
+                  <h2 class="place__title">Карачаевск</h2>
+                  <div class="place__heart"></div>
+                </div>
+              </li>
+              <li class="place">
+                <img
+                  src="./images/elbrus.jpg"
+                  alt="Эльбрус"
+                  class="place__image"
+                />
+                <div class="place__line">
+                  <h2 class="place__title">Эльбрус</h2>
+                  <div class="place__heart"></div>
+                </div>
+              </li>
+              <li class="place">
+                <img
+                  src="./images/dombay.jpg"
+                  alt="Домбай"
+                  class="place__image"
+                />
+                <div class="place__line">
+                  <h2 class="place__title">Домбай</h2>
+                  <div class="place__heart"></div>
+                </div>
+              </li>
+              <li class="place">
+                <img
+                  src="./images/severnaya-osetia.jpg"
+                  alt="Северная Осетия"
+                  class="place__image"
+                />
+                <div class="place__line">
+                  <h2 class="place__title">Северная Осетия</h2>
+                  <div class="place__heart"></div>
+                </div>
+              </li>
+              <li class="place">
+                <img
+                  src="./images/sochi.jpg"
+                  alt="Красная Поляна"
+                  class="place__image"
+                />
+                <div class="place__line">
+                  <h2 class="place__title">Красная Поляна</h2>
+                  <div class="place__heart"></div>
+                </div>
+              </li>
+              <li class="place">
+                <img
+                  src="./images/gorshok.jpg"
+                  alt="Санкт-Петербург"
+                  class="place__image"
+                />
+                <div class="place__line">
+                  <h2 class="place__title">Санкт-Петербург</h2>
+                  <div class="place__heart"></div>
+                </div>
+              </li>
+            </ul>
+          </section>
+          <!-- Section 2 (places) end -->
+        </main>
+        <!-- Main content end -->
+        <!-- Footer start -->
+        <footer class="footer">
+          <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
+        </footer>
+        <!-- Footer end -->
+        <!-- Pop-up start -->
+        <div class="popup">
+          <div class="popup__container">
+            <div class="popup__icon"></div>
+            <form class="popup__form">
+              <h2 class="popup__header">Редактировать профиль</h2>
+              <input type="text" placeholder="Имя" class="popup__name" />
+              <input type="text" placeholder="О себе" class="popup__job" />
+              <button class="popup__button">Сохранить</button>
+            </form>
+          </div>
+        </div>
+        <!-- Pop-up end -->
+      </div>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
