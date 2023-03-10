@@ -3,9 +3,10 @@
   margin-top: -40px;
   margin-right: -40px;
   align-self: flex-end;
+  border: none;
   width: 32px;
   height: 32px;
-  background: url(../../../images/close-icon.png);
+  background: url(../../../images/close-icon.svg) center no-repeat;
 }
 
 .popup__icon:hover {
