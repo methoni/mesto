@@ -1,8 +1,10 @@
 .place {
-  max-width: 282px;
+  width: 100%;
   background-color: #ffffff;
   border-radius: 10px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 282px) {
