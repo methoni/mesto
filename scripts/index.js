@@ -5,9 +5,9 @@ const closeProfileButton = document.querySelector('.popup__icon_profile');
 const closePlaceButton = document.querySelector('.popup__icon_place');
 const closeImageButton = document.querySelector('.popup__icon_image');
 
-const popupProfile = document.querySelector('.popup__profile');
-const popupPlace = document.querySelector('.popup__place');
-const popupImage = document.querySelector('.popup__image');
+const popupProfile = document.querySelector('.popup__window_profile');
+const popupPlace = document.querySelector('.popup__window_place');
+const popupImage = document.querySelector('.popup__window_image');
 const popupPic = document.querySelector('.popup__pic_image');
 const popupCaption = document.querySelector('.popup__caption_image');
 
