@@ -5,9 +5,9 @@ const closeProfileButton = document.querySelector('.popup__icon_profile');
 const closePlaceButton = document.querySelector('.popup__icon_place');
 const closeImageButton = document.querySelector('.popup__icon_image');
 
-const popupProfile = document.querySelector('.popup__window_profile');
-const popupPlace = document.querySelector('.popup__window_place');
-const popupImage = document.querySelector('.popup__window_image');
+const popupProfile = document.querySelector('.popup_profile');
+const popupPlace = document.querySelector('.popup_place');
+const popupImage = document.querySelector('.popup_image');
 const popupPic = document.querySelector('.popup__pic_image');
 const popupCaption = document.querySelector('.popup__caption_image');
 
@@ -72,7 +72,7 @@ function openPopup(popup) {
 }
 
 function closePopup(event) {
-  const popup = event.target.closest('.popup__window_general');
+  const popup = event.target.closest('.popup_window');
   popup.classList.remove('popup_opened');
 }
 
