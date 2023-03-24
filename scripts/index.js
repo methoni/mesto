@@ -72,7 +72,7 @@ function openPopup(popup) {
 }
 
 function closePopup(event) {
-  const popup = event.target.closest('.popup__window');
+  const popup = event.target.closest('.popup__window_general');
   popup.classList.remove('popup_opened');
 }
 
