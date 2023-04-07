@@ -26,6 +26,8 @@ const placeLinkInput = document.querySelector('.popup__input_place_link');
 const placeTemplate = document.querySelector('.place__template').content;
 const placesList = document.querySelector('.places__list_card');
 
+const overlayList = document.querySelectorAll('.popup');
+
 function renderPlace(placeCard) {
   const placeElement = placeTemplate.cloneNode(true);
   const placeImage = placeElement.querySelector('.place__image_card');
@@ -50,10 +52,29 @@ function closePopup(event) {
   popup.classList.remove('popup_opened');
 }
 
+function closeByOverlay(event) {
+  if (event.target === event.currentTarget) {
+    closePopup(event);
+  }
+}
+
+overlayList.forEach((currentPopup) => {
+  currentPopup.addEventListener('click', closeByOverlay);
+});
+
+function closeByEsc(event) {
+  if (event.key === 'Escape') {
+    overlayList.forEach((currentPopup) => {
+      currentPopup.classList.remove('popup_opened');
+    });
+  }
+}
+
 function openProfilePopup() {
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
   openPopup(popupProfile);
+  resetValidation(formEditProfile, settings);
 }
 
 function submitEditProfileForm(event) {
@@ -65,6 +86,7 @@ function submitEditProfileForm(event) {
 
 function openPlacePopup() {
   openPopup(popupPlace);
+  resetValidation(formPlaces, settings);
 }
 
 function handlePlacesFormSubmit(event) {
@@ -117,3 +139,4 @@ closePlaceButton.addEventListener('click', closePopup);
 closePlaceButton.addEventListener('click', resetFormSubmit);
 formPlaces.addEventListener('submit', handlePlacesFormSubmit);
 closeImageButton.addEventListener('click', closePopup);
+document.addEventListener('keydown', closeByEsc);
