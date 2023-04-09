@@ -3,9 +3,9 @@ const addPlaceButton = document.querySelector('.profile__add');
 
 const buttonCloseList = document.querySelectorAll('.popup__icon');
 
-const popupProfile = document.querySelector('.popup__profile');
-const popupPlace = document.querySelector('.popup__place');
-const popupImage = document.querySelector('.popup__image');
+const popupProfile = document.querySelector('.popup__profile_window');
+const popupPlace = document.querySelector('.popup__place_window');
+const popupImage = document.querySelector('.popup__image_window');
 const popupPic = document.querySelector('.popup__pic_image');
 const popupCaption = document.querySelector('.popup__caption_image');
 
