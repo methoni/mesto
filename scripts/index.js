@@ -2,7 +2,6 @@ const editProfileButton = document.querySelector('.profile__edit');
 const addPlaceButton = document.querySelector('.profile__add');
 
 const buttonCloseList = document.querySelectorAll('.popup__icon');
-const closePlaceButton = document.querySelector('.popup__icon_place');
 
 const popupProfile = document.querySelector('.popup_profile');
 const popupPlace = document.querySelector('.popup_place');
@@ -84,6 +83,7 @@ function submitEditProfileForm(event) {
 }
 
 function openPlacePopup() {
+  resetFormSubmit();
   openPopup(popupPlace);
   resetValidation(formPlaces, settings);
 }
@@ -94,7 +94,6 @@ function handlePlacesFormSubmit(event) {
   const placeElement = renderPlace(item);
   placesList.prepend(placeElement);
   closePopup(popupPlace);
-  resetFormSubmit();
 }
 
 function resetFormSubmit() {
@@ -133,5 +132,4 @@ function setEventListeners(placeElement) {
 editProfileButton.addEventListener('click', openProfilePopup);
 formEditProfile.addEventListener('submit', submitEditProfileForm);
 addPlaceButton.addEventListener('click', openPlacePopup);
-closePlaceButton.addEventListener('click', resetFormSubmit);
 formPlaces.addEventListener('submit', handlePlacesFormSubmit);
