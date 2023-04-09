@@ -63,8 +63,8 @@ function resetValidation(
   const formButton = formElement.querySelector(submitButtonSelector);
   formElement.querySelectorAll(inputSelector).forEach((inputElement) => {
     hideInputError(formElement, inputElement, { inputErrorClass, errorClass });
-    disableButton(formButton, rest);
   });
+  disableButton(formButton, rest);
 }
 
 // Включает спан с ошибкой и красное подчёркивание
