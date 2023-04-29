@@ -1,3 +1,6 @@
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
 const editProfileButton = document.querySelector('.profile__edit');
 const addPlaceButton = document.querySelector('.profile__add');
 
@@ -5,9 +8,6 @@ const buttonCloseList = document.querySelectorAll('.popup__icon');
 
 const popupProfile = document.querySelector('.popup_profile');
 const popupPlace = document.querySelector('.popup_place');
-const popupImage = document.querySelector('.popup_image');
-const popupPic = document.querySelector('.popup__pic_image');
-const popupCaption = document.querySelector('.popup__caption_image');
 
 const formEditProfile = document.querySelector('.popup__form_profile');
 const formPlaces = document.querySelector('.popup__form_places');
@@ -21,21 +21,53 @@ const profileJob = document.querySelector('.profile__job');
 const placeNameInput = document.querySelector('.popup__input_place_name');
 const placeLinkInput = document.querySelector('.popup__input_place_link');
 
-const placeTemplate = document.querySelector('.place__template').content;
 const placesList = document.querySelector('.places__list_card');
 
-function renderPlace(placeCard) {
-  const placeElement = placeTemplate.cloneNode(true);
-  const placeImage = placeElement.querySelector('.place__image_card');
-  placeElement.querySelector('.place__title_card').textContent = placeCard.name;
-  placeImage.src = placeCard.link;
-  placeImage.alt = placeCard.name;
-  setEventListeners(placeElement);
-  return placeElement;
-}
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
+  },
+];
 
-initialCards.forEach((placeCard) => {
-  const placeElement = renderPlace(placeCard);
+const settings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error', // Добавляет красное подчёркивание инпуту
+  errorClass: 'popup__error_visible', // Делает спан видимым
+};
+
+const profileValidator = new FormValidator(settings, popupProfile);
+profileValidator.enableValidation();
+
+const placeValidator = new FormValidator(settings, popupPlace);
+placeValidator.enableValidation();
+
+initialCards.forEach((item) => {
+  const card = new Card(item, '.place__template');
+  const placeElement = card.renderPlace();
   placesList.append(placeElement);
 });
 
@@ -72,7 +104,7 @@ function openProfilePopup() {
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
   openPopup(popupProfile);
-  resetValidation(formEditProfile, settings);
+  profileValidator.resetValidation();
 }
 
 function submitEditProfileForm(event) {
@@ -85,13 +117,14 @@ function submitEditProfileForm(event) {
 function openPlacePopup() {
   resetFormSubmit();
   openPopup(popupPlace);
-  resetValidation(formPlaces, settings);
+  placeValidator.resetValidation();
 }
 
 function handlePlacesFormSubmit(event) {
   event.preventDefault();
   const item = { name: placeNameInput.value, link: placeLinkInput.value };
-  const placeElement = renderPlace(item);
+  const card = new Card(item, '.place__template');
+  const placeElement = card.renderPlace();
   placesList.prepend(placeElement);
   closePopup(popupPlace);
 }
@@ -100,36 +133,9 @@ function resetFormSubmit() {
   formPlaces.reset();
 }
 
-function like(event) {
-  event.target.classList.toggle('place__heart_black');
-}
-
-function removePlace(event) {
-  const placeElement = event.target.closest('.place__element');
-  placeElement.remove();
-}
-
-function openImage(event) {
-  const card = event.target.closest('.place__image_card');
-  popupPic.src = card.src;
-  popupPic.alt = card.alt;
-  popupCaption.textContent = card.alt;
-  openPopup(popupImage);
-}
-
-function setEventListeners(placeElement) {
-  placeElement
-    .querySelector('.place__heart_switch')
-    .addEventListener('click', like);
-  placeElement
-    .querySelector('.place__trash_button')
-    .addEventListener('click', removePlace);
-  placeElement
-    .querySelector('.place__image_card')
-    .addEventListener('click', openImage);
-}
-
 editProfileButton.addEventListener('click', openProfilePopup);
 formEditProfile.addEventListener('submit', submitEditProfileForm);
 addPlaceButton.addEventListener('click', openPlacePopup);
 formPlaces.addEventListener('submit', handlePlacesFormSubmit);
+
+export { openPopup };
