@@ -4,14 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <link rel="stylesheet" href="pages/index.css" />
   </head>
   <body>
     <div class="page">
       <!-- Header start -->
       <header class="header">
         <img
-          src="./images/header__logo.svg"
+          src="<%=require('./images/header__logo.svg')%>"
           class="header__logo"
           alt="Логотип Mesto"
         />
@@ -22,7 +21,11 @@
       <main class="content">
         <!-- Section 1 (profile) start -->
         <section class="profile">
-          <img src="./images/avatar.png" alt="Аватар" class="profile__avatar" />
+          <img
+            src="<%=require('./images/avatar.png')%>"
+            alt="Аватар"
+            class="profile__avatar"
+          />
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button type="button" class="profile__edit"></button>
@@ -47,7 +50,7 @@
       <!-- Footer end -->
 
       <!-- Pop-up start -->
-      <div class="popup popup_profile">
+      <div class="popup popup-profile">
         <div class="popup__container">
           <button type="button" class="popup__icon"></button>
           <h2 class="popup__header">Редактировать профиль</h2>
@@ -91,7 +94,7 @@
       <!-- Pop-up end -->
 
       <!-- New place pop-up start -->
-      <div class="popup popup_place">
+      <div class="popup popup-place">
         <div class="popup__container">
           <button type="button" class="popup__icon"></button>
           <h2 class="popup__header">Новое место</h2>
@@ -129,11 +132,11 @@
       <!-- New place pop-up end -->
 
       <!-- Image pop-up start -->
-      <div class="popup popup_image popup_darker">
+      <div class="popup popup-image popup_darker">
         <div class="popup__card">
           <button type="button" class="popup__icon"></button>
-          <img src="#" alt="#" class="popup__pic popup__pic_image" />
-          <h2 class="popup__caption popup__caption_image"></h2>
+          <img src="#" alt="#" class="popup__pic popup-image__pic" />
+          <h2 class="popup__caption popup-image__caption"></h2>
         </div>
       </div>
       <!-- Image pop-up end -->
@@ -154,8 +157,5 @@
       </li>
     </template>
     <!-- Card template end -->
-
-    <script type="module" src="./scripts/index.js"></script>
-    
   </body>
 </html>
