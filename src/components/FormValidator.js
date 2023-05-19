@@ -1,6 +1,5 @@
 export default class FormValidator {
   constructor(data, formElement) {
-    this._formSelector = data.formSelector;
     this._inputSelector = data.inputSelector;
     this._submitButtonSelector = data.submitButtonSelector;
     this._inactiveButtonClass = data.inactiveButtonClass;
@@ -40,8 +39,8 @@ export default class FormValidator {
     }
   };
 
-  _hasInvalidInput = (inputList) => {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput = () => {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   };
@@ -71,9 +70,9 @@ export default class FormValidator {
     errorElement.textContent = '';
   };
 
-  _disableButton = (button) => {
-    button.classList.add(this._inactiveButtonClass);
-    button.setAttribute('disabled', '');
+  _disableButton = () => {
+    this._submitButton.classList.add(this._inactiveButtonClass);
+    this._submitButton.setAttribute('disabled', '');
   };
 
   _enableButton = (button) => {

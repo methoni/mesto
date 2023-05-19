@@ -7,7 +7,7 @@ export default class Section {
 
   // метод отрисовки всех карточек из массива
   renderItems() {
-    this._items.forEach((item) => this._renderer(item));
+    this._items.forEach(this._renderer);
   }
 
   // метод добавления карточки в контейнер

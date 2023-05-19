@@ -30,7 +30,6 @@ const initialCards = [
 
 // объект с данными для валидации
 const settings = {
-  formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',

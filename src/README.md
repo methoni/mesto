@@ -7,4 +7,6 @@
 * медиазапросы
 * псевдоклассы
 * переменные, функции, методы JavaScript
+* ООП
+* Webpack
 ## Проект на [GitHub Pages](https://methoni.github.io/mesto/)

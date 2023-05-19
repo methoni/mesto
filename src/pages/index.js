@@ -1,16 +1,16 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 import {
   editProfileButton,
   addPlaceButton,
   initialCards,
   settings,
   formValidators,
-} from './constants.js';
+} from '../utils/constants.js';
 
 import '../pages/index.css';
 
@@ -38,8 +38,7 @@ popupImage.setEventListeners();
 // функция создаёт карточку и возвращает её html представление
 function createCard(item) {
   const card = new Card(item, '.place__template', popupImage.open);
-  const placeElement = card.renderPlace();
-  return placeElement;
+  return card.renderPlace();
 }
 
 // функция добавляет в конкретную секцию новые карточки
