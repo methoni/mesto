@@ -8,6 +8,8 @@ export default class PopupWithForm extends Popup {
     this._inputList = Array.from(
       this._formElement.querySelectorAll('.popup__input')
     );
+    this._submitButton = this._popup.querySelector('.popup__button');
+    this._standardText = this._submitButton.textContent;
   }
 
   // метод собирает данные всех полей формы в объект
@@ -26,6 +28,16 @@ export default class PopupWithForm extends Popup {
     });
   }
 
+  // метод присваивает кнопке новый текст на время загрузки данных
+  _handleAwait() {
+    this._submitButton.textContent = 'Сохранение...';
+  }
+
+  // метод возвращает кнопке стандартный текст
+  resetButton() {
+    this._submitButton.textContent = this._standardText;
+  }
+
   close() {
     super.close();
     this._formElement.reset();
@@ -35,8 +47,8 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._formElement.addEventListener('submit', (event) => {
       event.preventDefault();
+      this._handleAwait();
       this._submitter(this._getInputValues());
-      this.close();
     });
   }
 }

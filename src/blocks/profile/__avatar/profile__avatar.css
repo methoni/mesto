@@ -1,12 +1,10 @@
 .profile__avatar {
   display: block;
-  padding-right: 30px;
-}
-
-@media screen and (max-width: 900px) {
-  .profile__avatar {
-    padding: 0;
-  }
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 282px) {

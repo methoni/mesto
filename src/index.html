@@ -21,15 +21,13 @@
       <main class="content">
         <!-- Section 1 (profile) start -->
         <section class="profile">
-          <img
-            src="<%=require('./images/avatar.png')%>"
-            alt="Аватар"
-            class="profile__avatar"
-          />
+          <button type="button" class="profile__avatar-edit">
+            <img src="#" alt="Аватар" class="profile__avatar" />
+          </button>
           <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button type="button" class="profile__edit"></button>
-            <p class="profile__job">Исследователь океана</p>
+            <p class="profile__job"></p>
           </div>
           <button type="button" class="profile__add"></button>
         </section>
@@ -75,23 +73,58 @@
             <div class="popup__block">
               <input
                 type="text"
-                name="job"
+                name="about"
                 placeholder="О себе"
                 class="popup__input popup__input_profile_job"
-                id="job-input"
+                id="about-input"
                 required
                 minlength="2"
                 maxlength="200"
               />
-              <span class="popup__input-error job-input-error"></span>
+              <span class="popup__input-error about-input-error"></span>
             </div>
-            <button type="submit" class="popup__button popup__button_profile">
-              Сохранить
-            </button>
+            <button type="submit" class="popup__button">Сохранить</button>
           </form>
         </div>
       </div>
       <!-- Pop-up end -->
+
+      <!-- Avatar pop-up start -->
+      <div class="popup popup-avatar">
+        <div class="popup__container popup__container_avatar">
+          <button type="button" class="popup__icon"></button>
+          <h2 class="popup__header">Обновить аватар</h2>
+          <form name="avatar-form" class="popup__form">
+            <div class="popup__block">
+              <input
+                type="url"
+                name="avatar"
+                placeholder="Ссылка на картинку"
+                class="popup__input"
+                id="avatar-input"
+                required
+              />
+              <span class="popup__input-error avatar-input-error"></span>
+            </div>
+            <button type="submit" class="popup__button">Сохранить</button>
+          </form>
+        </div>
+      </div>
+      <!-- Avatar pop-up end -->
+
+      <!-- Confirmation pop-up start -->
+      <div class="popup popup-confirm">
+        <div class="popup__container popup__container_confirm">
+          <button type="button" class="popup__icon"></button>
+          <h2 class="popup__header">Вы уверены?</h2>
+          <form name="confirm-form" class="popup__form popup__form_confirm">
+            <button type="submit" class="popup__button popup__button_confirm">
+              Да
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- Confirmation pop-up end -->
 
       <!-- New place pop-up start -->
       <div class="popup popup-place">
@@ -123,9 +156,7 @@
               />
               <span class="popup__input-error link-input-error"></span>
             </div>
-            <button type="submit" class="popup__button popup__button_places">
-              Создать
-            </button>
+            <button type="submit" class="popup__button">Создать</button>
           </form>
         </div>
       </div>
@@ -149,10 +180,13 @@
         <button type="button" class="place__trash place__trash_button"></button>
         <div class="place__line">
           <h2 class="place__title place__title_card place__title_card"></h2>
-          <button
-            type="button"
-            class="place__heart place__heart_switch"
-          ></button>
+          <div class="place__like-container">
+            <button
+              type="button"
+              class="place__heart place__like-icon"
+            ></button>
+            <span class="place__like-counter"></span>
+          </div>
         </div>
       </li>
     </template>

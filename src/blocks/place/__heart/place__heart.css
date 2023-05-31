@@ -4,7 +4,6 @@
   border: none;
   background: url(../../../images/like.svg) center no-repeat;
   padding: 0;
-  padding-right: 32px;
 }
 
 .place__heart:hover {

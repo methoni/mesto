@@ -1,14 +1,16 @@
 export default class UserInfo {
-  constructor({ nameSelector, jobSelector }) {
+  constructor({ nameSelector, aboutSelector, avatarSelector }) {
     this._name = document.querySelector(nameSelector);
-    this._job = document.querySelector(jobSelector);
+    this._about = document.querySelector(aboutSelector);
+    this._avatar = document.querySelector(avatarSelector);
   }
 
   // метод возвращает текущие значения из разметки
   getUserInfo() {
     const profileInfo = {
       name: this._name.textContent,
-      job: this._job.textContent,
+      about: this._about.textContent,
+      avatar: this._avatar.src,
     };
     return profileInfo;
   }
@@ -16,6 +18,7 @@ export default class UserInfo {
   // метод получает объект с ключами и устанавливает их в разметку
   setUserInfo(userData) {
     this._name.textContent = userData.name;
-    this._job.textContent = userData.job;
+    this._about.textContent = userData.about;
+    this._avatar.src = userData.avatar;
   }
 }
