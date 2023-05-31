@@ -1,6 +1,7 @@
 export default class Card {
   constructor(
     data,
+    myId,
     templateSelector,
     handleCardClick,
     handleTrashClick,
@@ -9,7 +10,7 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this._id = data.owner._id;
-    this._myId = data.myId;
+    this._myId = myId;
     this._cardId = data._id;
     this._likes = data.likes;
     this._templateSelector = templateSelector;
@@ -40,7 +41,7 @@ export default class Card {
     this._likesCounter.textContent = this._likes.length;
     this._setEventListeners();
     this._removeTrashIcon();
-    this._checkMyLikes();
+    this._updateLikesView();
     return this._element;
   }
 
@@ -51,35 +52,29 @@ export default class Card {
     }
   }
 
-  // метод ищет в массиве лайков мой лайк и закрашивает иконку при загрузке страницы
-  _checkMyLikes() {
-    this._likes.forEach((item) => {
-      if (item._id === this._myId) {
-        this._likeIcon.classList.add('place__heart_black');
-      }
-    });
+  // метод перезаписывает старый массив лайков на новый и вызывает метод отрисовки лайков
+  setLikes(likes) {
+    this._likes = likes;
+    this._updateLikesView();
   }
 
-  // метод устанавливает в отображение карточки количество лайков
-  renderLikes = (likes) => {
-    this._likesCounter.textContent = likes.length;
-  };
-
-  // метод переключает цвет иконки лайка
-  toggleLike = () => {
-    this._likeIcon.classList.toggle('place__heart_black');
-  };
-
-  // метод проверяет, закрашена ли иконка лайка
-  isLiked = () => {
-    if (this._likeIcon.classList.contains('place__heart_black')) {
-      return true;
+  // метод отрисовывает количество лайков и определяет, закрашивать или нет иконку лайка
+  _updateLikesView() {
+    this._likesCounter.textContent = this._likes.length;
+    if (this.isLiked()) {
+      this._likeIcon.classList.add('place__heart_black');
+    } else {
+      this._likeIcon.classList.remove('place__heart_black');
     }
-  };
+  }
+
+  // метод проверяет, есть ли в массиве лайков мой лайк
+  isLiked = () => this._likes.some((like) => like._id === this._myId);
 
   // метод удаляет карточку
   removePlace() {
     this._element.remove();
+    this._element = null;
   }
 
   _setEventListeners() {

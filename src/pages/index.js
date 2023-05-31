@@ -16,6 +16,8 @@ import {
 
 import '../pages/index.css';
 
+let userId = null;
+
 // функционал валидации форм
 
 const enableValidation = (settings) => {
@@ -53,7 +55,10 @@ const popupDelete = new PopupWithConfirmation(
   (item, cardId) => {
     api
       .deleteCard(cardId)
-      .then((res) => item.removePlace(res))
+      .then((res) => {
+        item.removePlace(res);
+        popupDelete.close();
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -66,6 +71,7 @@ popupDelete.setEventListeners();
 function createCard(item) {
   const card = new Card(
     item,
+    userId,
     '.place__template',
     popupImage.open,
     popupDelete.open,
@@ -74,8 +80,7 @@ function createCard(item) {
         api
           .deleteLike(cardId)
           .then((res) => {
-            card.toggleLike(res.likes);
-            card.renderLikes(res.likes);
+            card.setLikes(res.likes);
           })
           .catch((err) => {
             console.log(err);
@@ -84,8 +89,7 @@ function createCard(item) {
         api
           .addLike(cardId)
           .then((res) => {
-            card.toggleLike(res.likes);
-            card.renderLikes(res.likes);
+            card.setLikes(res.likes);
           })
           .catch((err) => {
             console.log(err);
@@ -98,16 +102,8 @@ function createCard(item) {
 
 // функция добавляет в конкретную секцию новые карточки
 function renderCard(cardData) {
-  api
-    .getMyUserInfo()
-    .then((res) => {
-      cardData.myId = res._id;
-      const cardElement = createCard(cardData);
-      section.addItem(cardElement);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const cardElement = createCard(cardData);
+  section.addItem(cardElement);
 }
 
 // создание экземпляра класса Section с объектом начальных карточек
@@ -119,12 +115,12 @@ const popupPlace = new PopupWithForm('.popup-place', (cardData) => {
     .addNewCard(cardData)
     .then((res) => {
       renderCard(res);
+      popupPlace.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      popupPlace.close();
       popupPlace.resetButton();
     });
 });
@@ -150,12 +146,14 @@ const userInfo = new UserInfo({
 const popupProfile = new PopupWithForm('.popup-profile', (profileData) => {
   api
     .editUserInfo(profileData)
-    .then((res) => userInfo.setUserInfo(res))
+    .then((res) => {
+      userInfo.setUserInfo(res);
+      popupProfile.close();
+    })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      popupProfile.close();
       popupProfile.resetButton();
     });
 });
@@ -173,12 +171,14 @@ function openProfilePopup() {
 const popupAvatar = new PopupWithForm('.popup-avatar', (avatarData) => {
   api
     .editAvatar(avatarData)
-    .then((res) => userInfo.setUserInfo(res))
+    .then((res) => {
+      userInfo.setUserInfo(res);
+      popupAvatar.close();
+    })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      popupAvatar.close();
       popupAvatar.resetButton();
     });
 });
@@ -197,6 +197,7 @@ function openAvatarPopup() {
 api
   .getAllNeededData()
   .then(([cardsData, userData]) => {
+    userId = userData._id;
     userInfo.setUserInfo(userData);
     section.renderItems(cardsData.reverse());
   })

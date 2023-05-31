@@ -5,20 +5,21 @@ export default class Api {
     this._authorization = options.headers.authorization;
   }
 
+  // проверка ответа сервера и преобразование из json
+  _getResponseData(res) {
+    if (!res.ok) {
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }
+    return res.json();
+  }
+
   // получение карточек с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
         authorization: this._authorization,
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(
-        `Ошибка добавления карточек с сервера: ${res.status}`
-      );
-    });
+    }).then((res) => this._getResponseData(res));
   }
 
   // добавление карточки на сервер
@@ -31,12 +32,7 @@ export default class Api {
         link: cardData.link,
         owner: cardData.owner,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка добавления карточки: ${res.status}`);
-    });
+    }).then((res) => this._getResponseData(res));
   }
 
   // удаление карточки с сервера
@@ -44,12 +40,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка удаления карточки: ${res.status}`);
-    });
+    }).then((res) => this._getResponseData(res));
   }
 
   // добавление лайка
@@ -59,12 +50,7 @@ export default class Api {
       headers: {
         authorization: this._authorization,
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка постановки лайка: ${res.status}`);
-    });
+    }).then((res) => this._getResponseData(res));
   }
 
   // удаление лайка
@@ -74,12 +60,7 @@ export default class Api {
       headers: {
         authorization: this._authorization,
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка удаления лайка: ${res.status}`);
-    });
+    }).then((res) => this._getResponseData(res));
   }
 
   // получение своих данных пользователя с сервера
@@ -88,14 +69,7 @@ export default class Api {
       headers: {
         authorization: this._authorization,
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(
-        `Ошибка получения данных пользователя: ${res.status}`
-      );
-    });
+    }).then((res) => this._getResponseData(res));
   }
 
   // внесение изменений в свои данные пользователя на сервере
@@ -107,14 +81,7 @@ export default class Api {
         name: profileData.name,
         about: profileData.about,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(
-        `Ошибка изменения данных пользователя: ${res.status}`
-      );
-    });
+    }).then((res) => this._getResponseData(res));
   }
 
   // изменение своего аватара на сервере
@@ -125,12 +92,7 @@ export default class Api {
       body: JSON.stringify({
         avatar: profileData.avatar,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка изменения аватара: ${res.status}`);
-    });
+    }).then((res) => this._getResponseData(res));
   }
 
   // возвращает массив промисов, которые нужно исполнить
